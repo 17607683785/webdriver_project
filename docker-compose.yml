@@ -11,7 +11,7 @@ services:
     environment:
       - SELENIUM_HUB_HOST=selenium-hub
       - SELENIUM_HUB_PORT=4444
-      - PORT=10000  # Add this line
+      - PORT=10000
 
   selenium-hub:
     image: selenium/hub:3.141.59
