@@ -12,6 +12,7 @@ services:
     environment:
       - SELENIUM_HUB_HOST=selenium-hub
       - SELENIUM_HUB_PORT=4444
+      - PORT=10000
     networks:
       - selenium-net
 
