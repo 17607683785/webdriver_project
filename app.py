@@ -12,7 +12,7 @@ def index():
     options.add_argument('--disable-dev-shm-usage')
 
     driver = webdriver.Remote(
-        command_executor='http://100.20.92.101:4444/wd/hub',  # 修改为你的WebDriver地址
+        command_executor='http://100.20.92.101:4444/wd/hub',  # 替换为实际的 WebDriver 地址
         options=options
     )
 
@@ -22,4 +22,4 @@ def index():
     return f"Page title is {title}"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    app.run(host='0.0.0.0', port=10000)
