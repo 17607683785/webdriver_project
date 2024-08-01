@@ -1,19 +1,20 @@
 from flask import Flask
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    options = Options()
+    options = webdriver.ChromeOptions()
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
     driver = webdriver.Remote(
-        command_executor='http://100.20.92.101:4444/wd/hub',  # 替换为实际的 WebDriver 地址
-        options=options
+        command_executor='http://selenium-hub:4444/wd/hub',
+        options=options,
+        desired_capabilities=DesiredCapabilities.CHROME
     )
 
     driver.get("http://www.example.com")
