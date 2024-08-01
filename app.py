@@ -12,7 +12,7 @@ def index():
     options.add_argument('--disable-dev-shm-usage')
 
     driver = webdriver.Remote(
-        command_executor='http://selenium-hub:4444/wd/hub',
+        command_executor='http://100.20.92.101:4444/wd/hub',  # Selenium Server 地址
         options=options,
         desired_capabilities=DesiredCapabilities.CHROME
     )
@@ -23,4 +23,4 @@ def index():
     return f"Page title is {title}"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
+    app.run(host='0.0.0.0', port=10000)  # Flask 应用监听的端口
