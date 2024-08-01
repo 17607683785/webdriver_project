@@ -12,9 +12,15 @@ def index():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
+    selenium_hub_host = os.environ.get('SELENIUM_HUB_HOST')
+    selenium_hub_port = os.environ.get('SELENIUM_HUB_PORT')
+
+    if not selenium_hub_host or not selenium_hub_port:
+        return "'SELENIUM_HUB_HOST' or 'SELENIUM_HUB_PORT' environment variable is not set", 500
+
     try:
         driver = webdriver.Remote(
-            command_executor=f'http://{os.environ["SELENIUM_HUB_HOST"]}:{os.environ["SELENIUM_HUB_PORT"]}/wd/hub',
+            command_executor=f'http://{selenium_hub_host}:{selenium_hub_port}/wd/hub',
             options=options,
             desired_capabilities=DesiredCapabilities.CHROME
         )
