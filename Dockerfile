@@ -1,7 +1,9 @@
 FROM python:3.8-slim
 
-# 安装依赖
+# 设置工作目录
 WORKDIR /app
+
+# 复制依赖文件并安装依赖
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
@@ -12,4 +14,4 @@ COPY . .
 EXPOSE 10000
 
 # 启动应用程序
-CMD ["python", "app.py"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:10000", "app:app"]
