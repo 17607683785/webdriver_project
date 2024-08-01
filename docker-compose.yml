@@ -7,7 +7,8 @@ services:
     volumes:
       - .:/app
     depends_on:
-      - selenium-hub
+      selenium-hub:
+        condition: service_healthy
     environment:
       - SELENIUM_HUB_HOST=selenium-hub
       - SELENIUM_HUB_PORT=4444
@@ -30,7 +31,8 @@ services:
   chrome:
     image: selenium/node-chrome:3.141.59
     depends_on:
-      - selenium-hub
+      selenium-hub:
+        condition: service_healthy
     environment:
       - HUB_HOST=selenium-hub
       - HUB_PORT=4444
