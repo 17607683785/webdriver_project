@@ -8,7 +8,7 @@ options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
 
 driver = webdriver.Remote(
-    command_executor='http://selenium-hub:4444/wd/hub',  # 修改为你的WebDriver地址
+    command_executor='http://100.20.92.101:4444/wd/hub',  # 修改为你的WebDriver地址
     options=options
 )
 
@@ -20,4 +20,3 @@ input("Press Enter to close the browser...")
 
 # 关闭浏览器
 driver.quit()
-
