@@ -13,5 +13,9 @@ COPY . .
 # 暴露端口
 EXPOSE 10000
 
+# 设置环境变量供 Render 识别
+ENV PORT=10000
+
 # 启动应用程序
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:10000", "app:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:$PORT", "app:app"]
+
