@@ -12,7 +12,7 @@ def index():
     options.add_argument('--disable-dev-shm-usage')
 
     driver = webdriver.Remote(
-        command_executor='http://100.20.92.101:4444/wd/hub',  # Selenium Server 地址
+        command_executor='http://selenium-hub:4444/wd/hub',  # Selenium Server 地址
         options=options,
         desired_capabilities=DesiredCapabilities.CHROME
     )
