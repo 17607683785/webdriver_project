@@ -11,12 +11,21 @@ services:
     environment:
       - SELENIUM_HUB_HOST=selenium-hub
       - SELENIUM_HUB_PORT=4444
-      - PORT=10000
+    networks:
+      - selenium-net
 
   selenium-hub:
     image: selenium/hub:3.141.59
     ports:
       - "4444:4444"
+    networks:
+      - selenium-net
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:4444/wd/hub/status || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
   chrome:
     image: selenium/node-chrome:3.141.59
@@ -27,3 +36,9 @@ services:
       - HUB_PORT=4444
     volumes:
       - /dev/shm:/dev/shm
+    networks:
+      - selenium-net
+
+networks:
+  selenium-net:
+    driver: bridge
