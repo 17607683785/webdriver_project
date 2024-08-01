@@ -1,17 +1,15 @@
-# 使用官方的 Python 镜像
-FROM python:3.9-slim
+FROM python:3.8-slim
 
-# 设置工作目录
+# 安装依赖
 WORKDIR /app
-
-# 复制项目文件到工作目录
-COPY . .
-
-# 安装项目依赖
+COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
+
+# 复制应用程序代码
+COPY . .
 
 # 暴露端口
 EXPOSE 10000
 
-# 运行应用
+# 启动应用程序
 CMD ["python", "app.py"]
