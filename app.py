@@ -1,22 +1,25 @@
+from flask import Flask
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-# 配置 WebDriver
-options = Options()
-options.add_argument('--headless')
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
+app = Flask(__name__)
 
-driver = webdriver.Remote(
-    command_executor='http://100.20.92.101:4444/wd/hub',  # 修改为你的WebDriver地址
-    options=options
-)
+@app.route('/')
+def index():
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
 
-# 打开一个网页
-driver.get("http://www.example.com")
+    driver = webdriver.Remote(
+        command_executor='http://100.20.92.101:4444/wd/hub',  # 修改为你的WebDriver地址
+        options=options
+    )
 
-# 保持浏览器打开
-input("Press Enter to close the browser...")
+    driver.get("http://www.example.com")
+    title = driver.title
+    driver.quit()
+    return f"Page title is {title}"
 
-# 关闭浏览器
-driver.quit()
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8000)
