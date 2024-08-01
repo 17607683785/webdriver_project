@@ -1,0 +1,22 @@
+version: '3'
+services:
+  webdriver:
+    build: .
+    ports:
+      - "4444:4444"
+    volumes:
+      - .:/app
+    depends_on:
+      - selenium-hub
+  selenium-hub:
+    image: selenium/hub
+    ports:
+      - "4444:4444"
+  chrome:
+    image: selenium/node-chrome
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+    volumes:
+      - /dev/shm:/dev/shm
